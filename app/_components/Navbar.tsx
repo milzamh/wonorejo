@@ -15,27 +15,27 @@ const Navbar = () => {
             </Link>
         </div>
         <div className="flex w-3/4 justify-end rm-0 gap-5">
-          <Link href="/about" className="text-black hover:text-white px-3 text-4">
+          <Link href="/about" className="text-black hover:text-[#0E6248] px-3 text-4">
             Profile Desa
           </Link>
           <p className="text-black">|</p>
-          <Link href="/contact" className="text-black hover:text-white px-3 text-4">
+          <Link href="/contact" className="text-black hover:text-[#0E6248] px-3 text-4">
             Infografis
           </Link>
           <p className="text-black">|</p>
-          <Link href="/contact" className="text-black hover:text-white px-3 text-4">
+          <Link href="/contact" className="text-black hover:text-[#0E6248] px-3 text-4">
             Potensi Desa
           </Link>
           <p className="text-black">|</p>
-          <Link href="/contact" className="text-black hover:text-white px-3 text-4">
+          <Link href="/contact" className="text-black hover:text-[#0E6248] px-3 text-4">
             Berita
           </Link>
           <p className="text-black">|</p>
-          <Link href="/contact" className="text-black hover:text-white px-3 text-4">
+          <Link href="/contact" className="text-black hover:text-[#0E6248] px-3 text-4">
             Layanan
           </Link>
           <p className="text-black">|</p>
-          <Link href="/contact" className="text-black hover:text-white px-3 text-4">
+          <Link href="/contact" className="text-black hover:text-[#0E6248] px-3 text-4">
             Kontak
           </Link>
         </div>
