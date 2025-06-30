@@ -15,7 +15,7 @@ const Navbar = () => {
             </Link>
         </div>
         <div className="flex w-3/4 justify-end rm-0 gap-5">
-          <Link href="/about" className="text-black hover:text-[#0E6248] px-3 text-4">
+          <Link href="/Profile" className="text-black hover:text-[#0E6248] px-3 text-4">
             Profile Desa
           </Link>
           <p className="text-black">|</p>
