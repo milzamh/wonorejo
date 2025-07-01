@@ -22,7 +22,7 @@ const Jelajah = () => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="px-18 pb-7 pt-21 flex gap-11">
-          <Link href={"/about"}>
+          <Link href={"/Profile"}>
             <Card className="w-40 h-40 text-gray-100 shadow-lg pt-8 pb-5 flex flex-col justify-center items-center hover:shadow-2xl transition-all duration-300">
               <FontAwesomeIcon
                 icon={faLandmark}
@@ -33,7 +33,7 @@ const Jelajah = () => {
               </CardDescription>
             </Card>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/Infografis"}>
             <Card className="w-40 h-40 text-gray-100 shadow-lg pt-8 pb-5 flex flex-col justify-center items-center hover:shadow-2xl transition-all duration-300">
               <FontAwesomeIcon
                 icon={faChartBar}
@@ -46,14 +46,14 @@ const Jelajah = () => {
           </Link>
         </div>
         <div className="pl-45 pb-25 flex gap-11">
-          <Link href={"/"}>
+          <a href="#potensi">
             <Card className="w-40 h-40 text-gray-100 shadow-lg pt-8 pb-5 flex flex-col justify-center items-center hover:shadow-2xl transition-all duration-300">
               <FontAwesomeIcon icon={faSeedling} className="text-10 text-black" />
               <CardDescription className="text-center">
                 <p className="text-black text-semibold">Potensi Desa</p>
               </CardDescription>
             </Card>
-          </Link>
+          </a>
           <Link href={"/"}>
             <Card className="w-40 h-40 text-gray-100 shadow-lg pt-8 pb-5 flex flex-col justify-center items-center hover:shadow-2xl transition-all duration-300">
               <FontAwesomeIcon

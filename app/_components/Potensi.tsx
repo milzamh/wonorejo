@@ -11,18 +11,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 const data = [
-  { image: "/Kopi.svg", title: "Kopi" },
+  { image: "/Kopi.svg", title: "Kopi Arabica" },
   { image: "/Singkong.svg", title: "Singkong Jaraktowa" },
   { image: "/Pariwisata.png", title: "Pariwisata" },
-  { image: "/Pariwisata.png", title: "Pariwisata" },
-  { image: "/Pariwisata.png", title: "Pariwisata" },
-  { image: "/Pariwisata.png", title: "Pariwisata" },
-  { image: "/Pariwisata.png", title: "Pariwisata" },
+  { image: "/Jamur.jpg", title: "Jamur Kuping" },
+  { image: "/Sayur.jpg", title: "Sentral Sayur" },
+  { image: "/Tembakau.jpg", title: "Tembakau"}
 ];
 
 const Potensi = () => {
   return (
-    <div className="flex flex-col px-18 pb-30 pt-[66px]">
+    <div id="potensi" className="flex flex-col px-18 pb-30 pt-[66px]">
       <h1 className="font-bold text-[32px] text-[#0E6248]">POTENSI DESA</h1>
       <Carousel className="w-full pt-20 mx-auto">
         <CarouselContent className="px-5 flex">
@@ -32,7 +31,7 @@ const Potensi = () => {
               className="basis-1/3 w-1/2 flex justify-center"
             >
               <div className="flex flex-col justify-center items-center space-y-4">
-                <div className="relative w-[250px] h-[250px] rounded-full overflow-hidden">
+                <div className="relative w-[250px] h-[250px] rounded-full overflow-hidden transition-all duration-300 hover:shadow-2xl">
                   <Link href='#'>
                     <Image
                       src={item.image}
