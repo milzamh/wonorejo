@@ -35,7 +35,7 @@ const Navbar = () => {
           </Link>
           <p className="text-black">|</p>
           <Link
-            href="/#potensi"
+            href="/Potensi"
             className="text-black hover:text-[#0E6248] px-3 text-4"
             >
             Potensi Desa
@@ -56,7 +56,7 @@ const Navbar = () => {
           </Link>
           <p className="text-black">|</p>
           <Link
-            href="/contact"
+            href="/Kontak"
             className="text-black hover:text-[#0E6248] px-3 text-4"
             >
             Kontak
