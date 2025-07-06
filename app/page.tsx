@@ -4,7 +4,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Hero from "./_components/Hero";
 import Jelajah from "./_components/Jelajah";
-import Berita from "./_components/Berita";
+import BeritaList from "./_components/BeritaList";
 import Potensi from "./_components/Potensi";
 import { client } from "./contentful/client";
 
@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <Jelajah />
       <Potensi  />
-      <Berita limitCount={6}/>
+      <BeritaList displayLimit={6}/>
     </main>
   );
 }

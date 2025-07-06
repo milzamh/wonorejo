@@ -140,7 +140,7 @@ const Infografis = () => {
           <div className="w-full h-55 flex justify-between gap-18 items-center">
             <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
               <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faUsers} className="h-[73px] text-black" />
+              <FontAwesomeIcon icon={faUsers} className="text-[73px] text-black" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
                 <h1 className="text-[#D41616] text-[28px] font-semibold">Total Penduduk</h1>
@@ -149,7 +149,7 @@ const Infografis = () => {
             </div>
             <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
               <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faPeopleRoof} className="h-[73px] text-black" />
+              <FontAwesomeIcon icon={faPeopleRoof} className="text-[73px] text-black" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
                 <h1 className="text-[#D41616] text-[28px] font-semibold">Kartu Keluarga</h1>
@@ -160,7 +160,7 @@ const Infografis = () => {
           <div className="w-full h-55 flex justify-between gap-18 items-center">
             <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
               <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faMale} className="h-[73px] text-black" />
+              <FontAwesomeIcon icon={faMale} className="text-[73px] text-black" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
                 <h1 className="text-[#D41616] text-[28px] font-semibold">Laki-laki</h1>
@@ -169,7 +169,7 @@ const Infografis = () => {
             </div>
             <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
               <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faFemale} className="h-[73px] text-black" />
+              <FontAwesomeIcon icon={faFemale} className="text-[73px] text-black" />
               </div>
               <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
                 <h1 className="text-[#D41616] text-[28px] font-semibold">Perempuan</h1>
