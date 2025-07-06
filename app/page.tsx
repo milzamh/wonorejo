@@ -6,16 +6,17 @@ import Hero from "./_components/Hero";
 import Jelajah from "./_components/Jelajah";
 import Berita from "./_components/Berita";
 import Potensi from "./_components/Potensi";
+import { client } from "./contentful/client";
 
-const STRAPI_API_URL = 'http://localhost:1338';
 
 export default function Home() {
+  console.log(client)
   return (
     <main className="flex flex-col color-bg">
       <Hero />
       <Jelajah />
       <Potensi  />
-      <Berita />
+      <Berita limitCount={6}/>
     </main>
   );
 }
