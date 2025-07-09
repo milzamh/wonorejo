@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const data = [
   { image: "/Kopi.svg", title: "Kopi Arabica" },
-  { image: "/Singkong.svg", title: "Singkong Jaraktowa" },
+  { image: "/Singkong.svg", title: "Singkong Jarak Towo" },
   { image: "/Pariwisata.png", title: "Pariwisata" },
   { image: "/Jamur.jpg", title: "Jamur Kuping" },
   { image: "/Sayur.jpg", title: "Sentral Sayur" },

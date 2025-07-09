@@ -43,9 +43,29 @@ const Navbar = () => {
                         Berita
                     </Link>
                     <p className="text-black text-sm md:text-base">|</p>
-                    <Link href="/Layanan" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
-                        Layanan
-                    </Link>
+                    <div className="relative group">
+                        <button className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
+                            Layanan ▾
+                        </button>
+                        <div className="absolute top-full left-0 mt-2 hidden group-hover:flex flex-col bg-white shadow-lg border rounded-md z-50 w-64">
+                            <a
+                            href="https://link-google-form-A.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 text-sm text-black hover:bg-gray-100"
+                            >
+                            Formulir Layanan Masyarakat
+                            </a>
+                            <a
+                            href="https://link-google-form-B.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 text-sm text-black hover:bg-gray-100"
+                            >
+                            Formulir Pengajuan Persuratan
+                            </a>
+                        </div>
+                    </div>
                     <p className="text-black text-sm md:text-base">|</p>
                     <Link href="/Kontak" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
                         Kontak

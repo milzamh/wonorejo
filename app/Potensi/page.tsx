@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const sda = [
   { image: "/Kopi.svg", title: "Kopi Arabica" },
-  { image: "/Singkong.svg", title: "Singkong Jaraktowa" },
+  { image: "/Singkong.svg", title: "Singkong Jarak Towo" },
   { image: "/Jamur.jpg", title: "Jamur Kuping" },
   { image: "/Sayur.jpg", title: "Sentral Sayur" },
   { image: "/Tembakau.jpg", title: "Tembakau" },
@@ -80,7 +80,7 @@ const Potensi = () => {
               >
                 <div className="flex flex-col justify-center items-center space-y-4">
                   <div className="relative w-[250px] h-[250px] rounded-full overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                    <Link href="#">
+                  <Link href={`/potensi/${encodeURIComponent(item.title.toLowerCase().replace(/\s+/g, "-"))}`}>
                       <Image
                         src={item.image}
                         alt={item.title}

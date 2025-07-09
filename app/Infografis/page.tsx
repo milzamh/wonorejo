@@ -3,18 +3,35 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers, faPeopleRoof, faMale, faFemale, faF } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUsers,
+  faPeopleRoof,
+  faMale,
+  faFemale,
+  faF,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Infografis = () => {
   return (
     <div className="flex flex-col">
-      <div className="bg-[url('/Hero.svg')] flex h-[550px] w-full px-12">
-        <div className="text-white text-left flex flex-col justify-center items-start w-full h-full px-10">
-          <h1 className="text-[64px] font-bold">Infografis</h1>
+      <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
+        <Image
+          src="/Hero.svg"
+          alt="Hero Infografis"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0" />
+        <div className="relative z-10 flex items-center h-full w-full px-6 md:px-12">
+          <h1 className="text-3xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight drop-shadow-md">
+            Infografis
+          </h1>
         </div>
       </div>
-      <div className="flex flex-col px-21 py-20">
-        <h1 className="font-bold text-[32px] text-[#0E6248]">
+
+      <div className="flex flex-col px-4 md:px-10 lg:px-20 py-10 md:py-20">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
           BATAS WILAYAH DESA
         </h1>
         <div className="w-full flex justify-center">
@@ -84,99 +101,56 @@ const Infografis = () => {
             </div>
           </div>
         </div>
-        <h1 className="font-bold text-[32px] text-[#0E6248] pt-20">
+
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
           LUAS WILAYAH DESA
         </h1>
-        <div className="px-10 w-full h-auto shadow-2xl my-10 rounded-lg flex">
-          <div className="w-1/2 py-7 flex flex-col">
-            {[
-              "Pemukiman",
-              "Ladang/tegalan",
-              "Pertanian Sawah",
-              "Hutan",
-              "Rawa-rawa",
-              "Perkantoran",
-              "Sekolah",
-              "Jalan",
-              "Lapangan sepak bola",
-            ].map((label, index, arr) => (
+        <div className="w-full shadow-2xl my-10 rounded-lg flex flex-col md:flex-row px-6 py-6 gap-6">
+          <div className="w-full md:w-1/2 flex flex-col">
+            {["Pemukiman", "Ladang/tegalan", "Pertanian Sawah", "Hutan", "Rawa-rawa", "Perkantoran", "Sekolah", "Jalan", "Lapangan sepak bola"].map((label, index, arr) => (
               <p
                 key={index}
-                className={`font-semibold text-[22px] py-2 ${
-                  index !== arr.length - 1 ? "border-b border-gray-500" : ""
-                }`}
+                className={`font-semibold text-lg md:text-[22px] py-2 ${index !== arr.length - 1 ? "border-b border-gray-500" : ""}`}
               >
                 {label}
               </p>
             ))}
           </div>
-          <div className="w-1/2 py-7 flex flex-col">
-            {[
-              "20.451.750 ha",
-              "135 ha",
-              "7913 ha",
-              "135 ha",
-              "135 ha",
-              "135 ha",
-              "135 ha",
-              "135 ha",
-              "1,2 ha",
-            ].map((value, index, arr) => (
+          <div className="w-full md:w-1/2 flex flex-col">
+            {["20.451.750 ha", "135 ha", "7913 ha", "135 ha", "135 ha", "135 ha", "135 ha", "135 ha", "1,2 ha"].map((value, index, arr) => (
               <p
                 key={index}
-                className={`text-[22px] py-2 ${
-                  index !== arr.length - 1 ? "border-b border-gray-500" : ""
-                }`}
+                className={`text-lg md:text-[22px] py-2 ${index !== arr.length - 1 ? "border-b border-gray-500" : ""}`}
               >
                 {value}
               </p>
             ))}
           </div>
         </div>
-        <h1 className="font-bold text-[32px] text-[#0E6248] pt-20">
+
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
           JUMLAH PENDUDUK
         </h1>
-        <div className="px-10 w-full h-auto my-10 rounded-lg flex flex-col gap-10">
-          <div className="w-full h-55 flex justify-between gap-18 items-center">
-            <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
-              <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faUsers} className="text-[73px] text-black" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          {[{ icon: faUsers, label: "Total Penduduk", value: "7024 Jiwa" }, { icon: faPeopleRoof, label: "Kartu Keluarga", value: "1564 KK" }, { icon: faMale, label: "Laki-laki", value: "3451 Jiwa" }, { icon: faFemale, label: "Perempuan", value: "3673 Jiwa" }].map((item, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg flex items-center p-4"
+            >
+              <div className="w-1/3 flex justify-center">
+                <FontAwesomeIcon
+                  icon={item.icon}
+                  className="text-[40px] md:text-[73px] text-black"
+                />
               </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
-                <h1 className="text-[#D41616] text-[28px] font-semibold">Total Penduduk</h1>
-                <p className="">7024 Jiwa</p>
-              </div>
-            </div>
-            <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
-              <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faPeopleRoof} className="text-[73px] text-black" />
-              </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
-                <h1 className="text-[#D41616] text-[28px] font-semibold">Kartu Keluarga</h1>
-                <p className="">1564 KK</p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full h-55 flex justify-between gap-18 items-center">
-            <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
-              <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faMale} className="text-[73px] text-black" />
-              </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
-                <h1 className="text-[#D41616] text-[28px] font-semibold">Laki-laki</h1>
-                <p className="">3451 Jiwa</p>
+              <div className="w-2/3 flex flex-col justify-center pl-4">
+                <h1 className="text-[#D41616] text-xl md:text-[28px] font-semibold">
+                  {item.label}
+                </h1>
+                <p>{item.value}</p>
               </div>
             </div>
-            <div className="w-1/2 h-55 bg-white shadow-lg rounded-lg flex items-center">
-              <div className="w-1/3 pl-10 h-full flex justify-center items-center">
-              <FontAwesomeIcon icon={faFemale} className="text-[73px] text-black" />
-              </div>
-              <div className="w-2/3 h-full flex flex-col justify-center items-start px-15">
-                <h1 className="text-[#D41616] text-[28px] font-semibold">Perempuan</h1>
-                <p className="">3673 Jiwa</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
