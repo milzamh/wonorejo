@@ -1,10 +1,25 @@
 'use client';
+
 import React, { useState } from "react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { useRouter, usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,16 +32,16 @@ const Navbar = () => {
 
     return (
         <nav className="bg-white h-[80px] md:h-[100px] flex justify-center items-center mx-auto shadow-md relative z-50">
-            <div className="container flex justify-between items-center px-4"> {/* px-4 untuk semua ukuran, container akan membatasi lebar */}
-                <div className="flex items-center gap-2 md:gap-5 flex-shrink-0"> {/* flex-shrink-0 agar logo tidak mengecil */}
+            <div className="container flex justify-between items-center px-4">
+                <div className="flex items-center gap-2 md:gap-5 flex-shrink-0">
                     <img src="/logo.svg" alt="Desa Wonorejo Logo" className="h-8 w-8 md:h-auto md:w-auto"></img>
-                    <Link href="/" className="text-black text-base md:text-[20px] font-semibold flex flex-col leading-tight"> {/* leading-tight untuk mengurangi spasi antar baris */}
+                    <Link href="/" className="text-black text-base md:text-[20px] font-semibold flex flex-col leading-tight">
                         Desa Wonorejo
                         <p className="text-xs md:text-[16px] font-thin">Kecamatan Jatiyoso</p>
                     </Link>
                 </div>
 
-                <div className="hidden md:flex flex-grow justify-end items-center gap-2 lg:gap-5"> {/* flex-grow agar mengambil sisa ruang, gap disesuaikan */}
+                <div className="hidden md:flex flex-grow justify-end items-center gap-2 lg:gap-5">
                     <Link href="/Profile" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
                         Profile Desa
                     </Link>
@@ -43,10 +58,29 @@ const Navbar = () => {
                         Berita
                     </Link>
                     <p className="text-black text-sm md:text-base">|</p>
-                    <Link href="/Layanan" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
-                        Layanan
-                    </Link>
+
+                    {/* Layanan Dropdown */}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <span className="text-black hover:text-[#0E6248] cursor-pointer px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
+                                Layanan
+                            </span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 mt-4">
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="/layanan/publik" className="block w-full h-full p-2 hover:bg-gray-100">
+                                    Pengajuan Persuratan
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
+                                    Layanan Pengaduan Masyarakat
+                                </Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                     <p className="text-black text-sm md:text-base">|</p>
+                    
                     <Link href="/Kontak" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
                         Kontak
                     </Link>
@@ -59,6 +93,7 @@ const Navbar = () => {
                 </div>
             </div>
 
+            {/* Mobile Menu */}
             {isMobileMenuOpen && (
                 <div className="md:hidden absolute top-[80px] left-0 w-full bg-white shadow-lg flex flex-col items-center py-6 animate-fade-in-down">
                     <Link href="/Profile" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
@@ -73,9 +108,18 @@ const Navbar = () => {
                     <Link href="/Berita" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Berita
                     </Link>
+                    
+                    {/* Simplified Layanan links for mobile */}
                     <Link href="/Layanan" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Layanan
                     </Link>
+                    <Link href="/layanan/publik" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center">
+                        - Pengajuan Persuratan
+                    </Link>
+                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
+                        - Layanan Pengaduan Masyarakat
+                    </Link>
+
                     <Link href="/Kontak" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center">
                         Kontak
                     </Link>
