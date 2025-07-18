@@ -77,6 +77,11 @@ const Navbar = () => {
                                     Layanan Pengaduan Masyarakat
                                 </Link>
                             </DropdownMenuItem>
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
+                                    Arsip Desa
+                                </Link>
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <p className="text-black text-sm md:text-base">|</p>

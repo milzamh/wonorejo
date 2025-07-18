@@ -79,9 +79,9 @@ const Potensi = () => {
 
               let linkHref = '#';
               if (item.fields.displayType === 'category_overview') {
-                linkHref = '/potensi'; 
+                linkHref = '/Potensi'; 
               } else {
-                linkHref = `/potensi/${item.fields.slug}`;
+                linkHref = `/Potensi/${item.fields.slug}`;
               }
 
               return (
