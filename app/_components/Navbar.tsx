@@ -58,8 +58,33 @@ const Navbar = () => {
                         Berita
                     </Link>
                     <p className="text-black text-sm md:text-base">|</p>
-
-                    {/* Layanan Dropdown */}
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <span className="text-black hover:text-[#0E6248] cursor-pointer px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
+                                Informasi Publik
+                            </span>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 mt-4">
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="https://forms.gle/XbvTjjxoLnN8pq2j8" className="block w-full h-full p-2 hover:bg-gray-100" target="_blank" rel="noopener noreferrer">
+                                    RABDes
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="https://forms.gle/ssUDuomrST6UmvDG6" className="block w-full h-full p-2 hover:bg-gray-100" target="_blank" rel="noopener noreferrer">
+                                    Peta Administrasi Desa
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="cursor-pointer">
+                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
+                                    Lokasi Rawan Longsor
+                                </Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    <p className="text-black text-sm md:text-base">|</p>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <span className="text-black hover:text-[#0E6248] cursor-pointer px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
@@ -68,18 +93,14 @@ const Navbar = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56 mt-4">
                             <DropdownMenuItem className="cursor-pointer">
-                                <Link href="/layanan/publik" className="block w-full h-full p-2 hover:bg-gray-100">
+                                <Link href="https://forms.gle/XbvTjjxoLnN8pq2j8" className="block w-full h-full p-2 hover:bg-gray-100" target="_blank" rel="noopener noreferrer">
                                     Pengajuan Persuratan
                                 </Link>
                             </DropdownMenuItem>
+                            <DropdownMenuSeparator />
                             <DropdownMenuItem className="cursor-pointer">
-                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
+                                <Link href="https://forms.gle/ssUDuomrST6UmvDG6" className="block w-full h-full p-2 hover:bg-gray-100" target="_blank" rel="noopener noreferrer">
                                     Layanan Pengaduan Masyarakat
-                                </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer">
-                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
-                                    Arsip Desa
                                 </Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -113,8 +134,18 @@ const Navbar = () => {
                     <Link href="/Berita" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Berita
                     </Link>
-                    
-                    {/* Simplified Layanan links for mobile */}
+                    <Link href="/Layanan" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
+                        Informasi Publik
+                    </Link>
+                    <Link href="/layanan/publik" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center">
+                        - Arsip Desa
+                    </Link>
+                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
+                        - Peta Administrasi Desa
+                    </Link>
+                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
+                        - Lokasi Rawan Longsor
+                    </Link>
                     <Link href="/Layanan" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Layanan
                     </Link>
