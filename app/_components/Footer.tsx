@@ -8,9 +8,9 @@ const Footer = () => {
       <div className="bg-[#0E6248] text-white pt-8 pb-6 px-4 md:pt-15 md:pb-10 md:px-20 flex flex-col md:flex-row w-full justify-between items-center md:items-start text-center md:text-left">
         <div className="flex flex-col md:items-start w-full md:w-1/2 gap-3 mb-8 md:mb-0 md:gap-5">
             <img
-              src="/logo.png"
+              src="/logo2.png"
               alt="Desa Wonorejo Logo"
-              className="h-10 w-10 md:h-auto md:w-auto"
+              className="h-12 w-auto md:h-16"
             ></img>
             <div className="flex flex-col">
               <h1 className="text-lg md:text-[20px] font-semibold">
