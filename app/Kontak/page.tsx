@@ -20,7 +20,7 @@ const Kontak = () => {
           </h1>
         </div>
       </div>
-      <div className="flex flex-col px-18 pb-20 pt-30">
+      <div className="flex flex-col px-18 py-20">
         <h1 className="font-bold text-[32px] text-[#0E6248]">KONTAK KAMI</h1>
         <p className="text-[24px] font-semibold pt-10">Alamat:</p>
         <p className="pb-5 text-[20px]">
