@@ -147,9 +147,9 @@ const BeritaList = ({ displayLimit, itemsPerPage }: BeritaListProps) => {
   };
 
   return (
-    <div className="flex flex-col px-4 md:px-18 pb-10 md:pb-30 pt-10 md:pt-18 items-center">
-      <div className="w-full text-center md:text-left">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-[32px] text-[#0E6248]">BERITA DESA</h1>
+    <div className="flex flex-col px-4 md:px-18 pb-10 md:pb-30 pt-10 md:pt-18">
+      <div className="flex flex-col px-2 py-2 ">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">BERITA DESA</h1>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-8 sm:gap-y-12 mt-8 w-full">
         {loading ? (

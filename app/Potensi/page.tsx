@@ -18,9 +18,10 @@ interface IPotensiFields {
   gambarPotensi: Asset;
   slug: string;
   deskripsiPotensi: any;
-  kategoriPotensi: 'SDA' | 'Pariwisata';
-  displayType: 'items' | 'category_overview';
+  kategoriPotensi: 'SDA' | 'Pariwisata' | string;
+  displayType: 'items' | 'category_overview' | string;
 }
+
 
 type PotensiSkeleton = EntrySkeletonType<IPotensiFields, 'potensiDesa'>;
 type PotensiEntry = Entry<PotensiSkeleton>;
@@ -39,10 +40,10 @@ const Potensi = () => {
         });
 
         const sda = entries.items.filter(item => 
-          item.fields.displayType === 'items' && item.fields.kategoriPotensi === 'SDA'
+          item.fields.displayType.toString() === 'items' && item.fields.kategoriPotensi.toString() === 'SDA'
         );
         const pariwisata = entries.items.filter(item => 
-          item.fields.displayType === 'items' && item.fields.kategoriPotensi === 'Pariwisata'
+          item.fields.displayType.toString() === 'items' && item.fields.kategoriPotensi.toString() === 'Pariwisata'
         );
 
         setSdaItems(sda);
@@ -66,19 +67,24 @@ const Potensi = () => {
     }
 
     return (
-      <div id={categorySlug} className="flex flex-col px-4 md:px-18 pb-10 md:pb-30 pt-10 md:pt-[66px]">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-[32px] text-[#0E6248] text-center md:text-left w-full">
+      <div id={categorySlug} className="flex flex-col px-4 md:px-10 lg:px-20 py-10 md:py-20">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
           {title}
         </h1>
         <Carousel className="w-full pt-8 md:pt-20 mx-auto">
           <CarouselContent className="px-2 md:px-5 flex">
             {data.map((item, index) => {
-              const imageUrl = item.fields.gambarPotensi?.fields?.file?.url ? `https:${item.fields.gambarPotensi.fields.file.url}` : '/placeholder.svg';
-              const titleText = item.fields.judulPotensi || 'Nama Potensi';
+              const imageUrl = (item.fields.gambarPotensi as any)?.fields?.file?.url
+              ? `https:${(item.fields.gambarPotensi as any).fields.file.url}`
+              : '/placeholder.svg';
+            
+              const titleText = typeof item.fields.judulPotensi === 'string' 
+                ? item.fields.judulPotensi 
+                : 'Nama Potensi';
               const uniqueKey = item.sys?.id || `potensi-${index}`;
 
               let linkHref = '#';
-              if (item.fields.displayType === 'category_overview') {
+              if (item.fields.displayType.toString() === 'category_overview') {
                 linkHref = '/Potensi'; 
               } else {
                 linkHref = `/Potensi/${item.fields.slug}`;

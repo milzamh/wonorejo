@@ -21,11 +21,10 @@ const ProfilePage = () => {
           </h1>
         </div>
       </div>
-      <div className="mx-auto w-full max-w-6xl space-y-16 px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <section>
-          <h2 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
+      <div className="flex flex-col px-4 md:px-10 lg:px-20 py-10 md:py-20">
+          <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
             SEJARAH DESA
-          </h2>
+          </h1>
           <div className="mt-5 rounded-lg shadow-lg bg-white px-6 md:px-10 py-6 md:py-8">
             <p className="indent-8 text-justify text-base md:text-lg leading-relaxed">
               Sejarah Desa Wonorejo Zaman dahulu merupakan wilayah kekuasaan
@@ -57,11 +56,9 @@ const ProfilePage = () => {
               Wonorejo.
             </p>
           </div>
-        </section>
-        <section>
-          <h2 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
+          <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
             VISI MISI
-          </h2>
+          </h1>
           <div className="mt-5 rounded-lg shadow-lg bg-white px-6 md:px-10 py-6 md:py-8">
             <p className="indent-8 text-justify text-base md:text-lg leading-relaxed">
               Demokratisasi mengandung makna bahwa penyelenggaraan pemerintahan
@@ -88,11 +85,10 @@ const ProfilePage = () => {
               mencapai tujuan tersebut, maka dirumuskan Visi dan Misi Desa.
             </p>
           </div>
-        </section>
-        <section>
-          <h2 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
+        
+          <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
             VISI
-          </h2>
+          </h1>
           <div className="mt-5 rounded-lg shadow-lg bg-white px-6 md:px-10 py-6 md:py-8">
             <p className="text-center text-lg md:text-xl font-semibold text-red-500">
               “Tercapainya Desa Wonorejo yang Makmur dan Sejahtera”
@@ -105,19 +101,17 @@ const ProfilePage = () => {
               kesejahteraan masyarakat yang dilandasi semangat kebersamaan.
             </p>
           </div>
-        </section>
-        <section>
-          <h2 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
+        
+          <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
             MISI
-          </h2>
+          </h1>
           <div className="mt-5 rounded-lg shadow-lg bg-white px-6 md:px-10 py-6 md:py-8">
-            <ol className="list-decimal space-y-2 pl-6 text-base md:text-lg font-semibold text-red-500">
+            <ol className="list-decimal space-y-2 pl-6 text-base md:text-lg">
               <li>Mewujudkan Pemerintah Desa Wonorejo yang tertib dan berwibawa</li>
               <li>Mewujudkan sarana dan prasarana desa yang memadai</li>
               <li>Meningkatkan perekonomian dan kesejahteraan masyarakat Desa Wonorejo</li>
             </ol>
           </div>
-        </section>
       </div>
     </div>
   );

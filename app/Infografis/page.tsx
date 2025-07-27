@@ -34,73 +34,81 @@ const Infografis = () => {
         <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248]">
           BATAS WILAYAH DESA
         </h1>
-        <div className="w-full flex justify-center">
-          <div className="w-1/3 flex justify-center items-center">
-            <div className="w-95 h-40 shadow-lg radius-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-              <div className="w-1/2 flex justify-center items-center">
-                <span
-                  className="material-symbols-outlined text-[#FF8B2D] transform -rotate-90"
-                  style={{ fontSize: "90px" }}
-                >
-                  Navigation
-                </span>
-              </div>
-              <div className="flex flex-col w-auto justify-center text-center">
-                <h1 className="text-[#FF8B2D] font-bold text-[24px]">Barat</h1>
-                <p className="">Desa Tlobo</p>
-                <p>Desa Jatiyoso</p>
-              </div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {/* Barat */}
+        <div className="flex justify-center items-center">
+          <div className="w-full max-w-[300px] h-40 shadow-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div className="w-1/2 flex justify-center items-center">
+              <span
+                className="material-symbols-outlined text-[#FF8B2D] transform -rotate-90"
+                style={{ fontSize: "90px" }}
+              >
+                Navigation
+              </span>
             </div>
-          </div>
-          <div className="w-1/3 h-110 flex flex-col gap-10 flex flex-col justify-center items-center ">
-            <div className="h-40 w-95 shadow-lg radius-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-              <div className="w-1/2 flex justify-center items-center">
-                <span
-                  className="material-symbols-outlined text-[#D41616] transform "
-                  style={{ fontSize: "90px" }}
-                >
-                  Navigation
-                </span>
-              </div>
-              <div className="flex flex-col w-1/3 justify-center text-center">
-                <h1 className="text-[#D41616] font-bold text-[24px]">Utara</h1>
-                <p className="">Desa Beruk</p>
-              </div>
-            </div>
-            <div className="h-40 w-95 shadow-lg radius-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-              <div className="w-1/2 flex justify-center items-center">
-                <span
-                  className="material-symbols-outlined text-[#0E6248] transform rotate-180"
-                  style={{ fontSize: "90px" }}
-                >
-                  Navigation
-                </span>
-              </div>
-              <div className="flex flex-col w-auto justify-center text-center">
-                <h1 className="text-[#0E6248] font-bold text-[24px]">
-                  Selatan
-                </h1>
-                <p className="">Desa Wonokeling</p>
-              </div>
-            </div>
-          </div>
-          <div className="w-1/3 flex justify-center items-center ">
-            <div className="w-95 h-40 shadow-lg radius-lg rounded-lg flex transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-              <div className="flex flex-col w-1/3 ml-15 justify-center text-center">
-                <h1 className="text-[#0019E0] font-bold text-[24px]">Timur</h1>
-                <p className="">Provinsi Jawa Timur</p>
-              </div>
-              <div className="w-1/2 flex justify-center items-center">
-                <span
-                  className="material-symbols-outlined text-[#0019E0] transform -rotate-270"
-                  style={{ fontSize: "90px" }}
-                >
-                  Navigation
-                </span>
-              </div>
+            <div className="flex flex-col justify-center text-center">
+              <h1 className="text-[#FF8B2D] font-bold text-[24px]">Barat</h1>
+              <p>Desa Tlobo</p>
+              <p>Desa Jatiyoso</p>
             </div>
           </div>
         </div>
+
+        {/* Utara & Selatan */}
+        <div className="flex flex-col gap-6 items-center">
+          {/* Utara */}
+          <div className="w-full max-w-[300px] h-40 shadow-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div className="w-1/2 flex justify-center items-center">
+              <span
+                className="material-symbols-outlined text-[#D41616]"
+                style={{ fontSize: "90px" }}
+              >
+                Navigation
+              </span>
+            </div>
+            <div className="flex flex-col justify-center text-center">
+              <h1 className="text-[#D41616] font-bold text-[24px]">Utara</h1>
+              <p>Desa Beruk</p>
+            </div>
+          </div>
+
+          {/* Selatan */}
+          <div className="w-full max-w-[300px] h-40 shadow-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div className="w-1/2 flex justify-center items-center">
+              <span
+                className="material-symbols-outlined text-[#0E6248] rotate-180"
+                style={{ fontSize: "90px" }}
+              >
+                Navigation
+              </span>
+            </div>
+            <div className="w-1/2 flex flex-col justify-center text-center -ml-8">
+              <h1 className="text-[#0E6248] font-bold text-[24px]">Selatan</h1>
+              <p>Desa Wonokeling</p>
+            </div>
+          </div>
+        </div>
+
+
+        {/* Timur */}
+        <div className="flex justify-center items-center">
+          <div className="w-full max-w-[300px] h-40 shadow-lg rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div className="flex flex-col justify-center text-center pl-4">
+              <h1 className="text-[#0019E0] font-bold text-[24px]">Timur</h1>
+              <p>Provinsi Jawa Timur</p>
+            </div>
+            <div className="w-1/2 flex justify-center items-center">
+              <span
+                className="material-symbols-outlined text-[#0019E0] -rotate-270"
+                style={{ fontSize: "90px" }}
+              >
+                Navigation
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
         <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] pt-20">
           LUAS WILAYAH DESA

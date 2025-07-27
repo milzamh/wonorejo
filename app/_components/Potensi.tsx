@@ -13,28 +13,17 @@ import Image from "next/image";
 import { client } from "../contentful/client";
 import type { Entry, Asset, EntryCollection, EntrySkeletonType } from "contentful";
 
-<<<<<<< HEAD
-const data = [
-  { image: "/Kopi.svg", title: "Kopi Arabica" },
-  { image: "/Singkong.svg", title: "Singkong Jarak Towo" },
-  { image: "/Pariwisata.png", title: "Pariwisata" },
-  { image: "/Jamur.jpg", title: "Jamur Kuping" },
-  { image: "/Sayur.jpg", title: "Sentral Sayur" },
-  { image: "/Tembakau.jpg", title: "Tembakau"}
-];
-=======
 interface IPotensiFields {
   judulPotensi: string;
   gambarPotensi: Asset;
   slug: string;
   deskripsiPotensi: any;
-  kategoriPotensi: 'SDA' | 'Pariwisata';
-  displayType: 'items' | 'category_overview';
+  kategoriPotensi: 'SDA' | 'Pariwisata' | string;
+  displayType: 'items' | 'category_overview' | string;
 }
 
 type PotensiSkeleton = EntrySkeletonType<IPotensiFields, 'potensiDesa'>;
 type PotensiEntry = Entry<PotensiSkeleton>;
->>>>>>> origin/main
 
 const Potensi = () => {
   const [loading, setLoading] = useState(true);
@@ -51,19 +40,23 @@ const Potensi = () => {
         const allItems = entries.items;
 
         const filteredForLanding = allItems.filter(item => {
-            const isSdaItem = item.fields.displayType === 'items' && item.fields.kategoriPotensi === 'SDA';
-            const isPariwisataOverview = item.fields.displayType === 'category_overview' && item.fields.kategoriPotensi === 'Pariwisata';
+            const isSdaItem = item.fields.displayType.toString() === 'items' && item.fields.kategoriPotensi.toString() === 'SDA';
+            const isPariwisataOverview = item.fields.displayType.toString() === 'category_overview' && item.fields.kategoriPotensi.toString() === 'Pariwisata';
 
             return isSdaItem || isPariwisataOverview;
         });
 
         const sortedForLanding = filteredForLanding.sort((a, b) => {
-            if (a.fields.displayType === 'category_overview' && b.fields.displayType === 'items') return -1;
-            if (a.fields.displayType === 'items' && b.fields.displayType === 'category_overview') return 1;
-            return a.fields.judulPotensi.localeCompare(b.fields.judulPotensi);
+          const aType = a.fields.displayType?.toString() ?? '';
+          const bType = b.fields.displayType?.toString() ?? '';
+        
+          if (aType === 'category_overview' && bType === 'items') return -1;
+          if (aType === 'items' && bType === 'category_overview') return 1;
+        
+          return String(a.fields.judulPotensi).localeCompare(String(b.fields.judulPotensi));
         });
-
-
+        
+        
         setPotensiDataForLanding(sortedForLanding);
         setLoading(false);
       } catch (error) {
@@ -84,12 +77,26 @@ const Potensi = () => {
         <Carousel className="w-full pt-8 md:pt-20 mx-auto">
           <CarouselContent className="px-2 md:px-5 flex">
             {potensiDataForLanding.map((item, index) => {
-              const imageUrl = item.fields.gambarPotensi?.fields?.file?.url ? `https:${item.fields.gambarPotensi.fields.file.url}` : '/placeholder.svg';
-              const titleText = item.fields.judulPotensi || 'Nama Potensi';
+              const gambarAsset = item.fields.gambarPotensi as {
+                fields?: {
+                  file?: {
+                    url?: string;
+                  };
+                };
+              };
+              
+              const imageUrl = (item.fields.gambarPotensi as any)?.fields?.file?.url
+              ? `https:${(item.fields.gambarPotensi as any).fields.file.url}`
+              : '/placeholder.svg';
+            
+              const titleText = typeof item.fields.judulPotensi === 'string' 
+                ? item.fields.judulPotensi 
+                : 'Nama Potensi';
+
               const uniqueKey = item.sys?.id || `potensi-${index}`;
 
               let linkHref = '#'; 
-              if (item.fields.displayType === 'category_overview') {
+              if (item.fields.displayType.toString() === 'category_overview') {
                   linkHref = '/Potensi';
               } else {
                   linkHref = `/Potensi/${item.fields.slug}`;

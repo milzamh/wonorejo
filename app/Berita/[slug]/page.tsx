@@ -121,9 +121,19 @@ export default async function BeritaDetailPage({
 
   return (
     <div className="flex flex-col">
-      <div className="bg-[url('/Hero.svg')] flex h-[550px] w-full px-12">
-        <div className="text-white text-left flex flex-col justify-center items-start w-full h-full px-10">
-          <h1 className="text-[64px] font-bold">Berita Desa</h1>
+       <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
+        <Image
+          src="/Hero.svg"
+          alt="Hero Berita"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0" />
+        <div className="relative z-10 flex items-center h-full w-full px-6 md:px-12">
+          <h1 className="text-3xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight drop-shadow-md">
+            Berita Desa
+          </h1>
         </div>
       </div>
       <div className="flex flex-col px-21 py-15">

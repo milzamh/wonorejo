@@ -79,8 +79,6 @@ const richTextRenderOptions = {
     ),
   },
 };
-
-// 🔧 Fungsi untuk menghitung ukuran responsif berdasarkan orientasi gambar
 function getResponsiveImageSize(width: number, height: number) {
   const isPortrait = height > width;
 
@@ -147,9 +145,19 @@ const PotensiDetailPage: React.FC<PotensiDetailPageProps> = async ({
 
   return (
     <div className="flex flex-col">
-      <div className="bg-[url('/Hero.svg')] flex h-[550px] w-full px-4 md:px-12">
-        <div className="text-white text-left flex flex-col justify-center items-start w-full h-full px-4 md:px-10">
-          <h1 className="text-[48px] md:text-[64px] font-bold">Potensi Desa</h1>
+       <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
+        <Image
+          src="/Hero.svg"
+          alt="Hero Potensi"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0" />
+        <div className="relative z-10 flex items-center h-full w-full px-6 md:px-12">
+          <h1 className="text-3xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight drop-shadow-md">
+            Potensi Desa
+          </h1>
         </div>
       </div>
       <div className="container mx-auto px-4 py-8 md:py-12">
