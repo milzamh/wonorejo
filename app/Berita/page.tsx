@@ -16,7 +16,7 @@ const Berita = () => {
         />
         <div className="absolute inset-0" />
         <div className="relative z-10 flex items-center h-full w-full px-6 md:px-12">
-          <h1 className="text-3xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight drop-shadow-md">
+          <h1 className="text-3xl md:text-5xl lg:text-[64px] font-bold text-white leading-tight drop-shadow-md pl-12">
             Berita Desa Wonorejo
           </h1>
         </div>

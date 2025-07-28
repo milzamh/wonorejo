@@ -4,29 +4,38 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isInformasiPublikMobileOpen, setIsInformasiPublikMobileOpen] = useState(false);
+    const [isLayananMobileOpen, setIsLayananMobileOpen] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+        if (!isMobileMenuOpen) {
+            setIsInformasiPublikMobileOpen(false);
+            setIsLayananMobileOpen(false);
+        }
+    };
+
+    const toggleInformasiPublikMobile = () => {
+        setIsInformasiPublikMobileOpen(!isInformasiPublikMobileOpen);
+        setIsLayananMobileOpen(false);
+    };
+
+    const toggleLayananMobile = () => {
+        setIsLayananMobileOpen(!isLayananMobileOpen);
+        setIsInformasiPublikMobileOpen(false);
     };
 
     return (
@@ -40,7 +49,7 @@ const Navbar = () => {
                     </Link>
                 </div>
 
-                <div className="hidden md:flex flex-grow justify-end items-center gap-2 lg:gap-5">
+                <div className="hidden lg:flex flex-grow justify-end items-center gap-2 lg:gap-5">
                     <Link href="/Profile" className="text-black hover:text-[#0E6248] px-1 lg:px-2 text-sm md:text-base whitespace-nowrap">
                         Profile Desa
                     </Link>
@@ -77,7 +86,7 @@ const Navbar = () => {
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem className="cursor-pointer">
-                                <Link href="/layanan/mandiri" className="block w-full h-full p-2 hover:bg-gray-100">
+                                <Link href="/Bencana" className="block w-full h-full p-2 hover:bg-gray-100">
                                     Lokasi Rawan Longsor
                                 </Link>
                             </DropdownMenuItem>
@@ -111,16 +120,15 @@ const Navbar = () => {
                     </Link>
                 </div>
 
-                <div className="md:hidden flex items-center">
+                <div className="lg:hidden flex items-center">
                     <button onClick={toggleMobileMenu} className="text-black text-2xl focus:outline-none">
                         <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden absolute top-[80px] left-0 w-full bg-white shadow-lg flex flex-col items-center py-6 animate-fade-in-down">
+                <div className="lg:hidden absolute top-[80px] left-0 w-full bg-white shadow-lg flex flex-col items-center py-6 animate-fade-in-down">
                     <Link href="/Profile" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Profile Desa
                     </Link>
@@ -133,27 +141,49 @@ const Navbar = () => {
                     <Link href="/Berita" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
                         Berita
                     </Link>
-                    <Link href="/Layanan" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
-                        Informasi Publik
-                    </Link>
-                    <Link href="/layanan/publik" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center">
-                        - Arsip Desa
-                    </Link>
-                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
-                        - Peta Administrasi Desa
-                    </Link>
-                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
-                        - Lokasi Rawan Longsor
-                    </Link>
-                    <Link href="/Layanan" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200">
-                        Layanan
-                    </Link>
-                    <Link href="/layanan/publik" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center">
-                        - Pengajuan Persuratan
-                    </Link>
-                    <Link href="/layanan/mandiri" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-1 text-base w-full text-center border-b border-gray-200">
-                        - Layanan Pengaduan Masyarakat
-                    </Link>
+                    
+                    <div className="w-full">
+                        <button
+                            onClick={toggleInformasiPublikMobile}
+                            className="flex justify-center items-center text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200"
+                        >
+                            <span>Informasi Publik</span>
+                            <FontAwesomeIcon icon={isInformasiPublikMobileOpen ? faChevronUp : faChevronDown} className="ml-2" />
+                        </button>
+                        {isInformasiPublikMobileOpen && (
+                            <div className="flex flex-col w-full bg-gray-50">
+                                <Link href="https://forms.gle/XbvTjjxoLnN8pq2j8" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-6 py-1 text-base w-full text-center" target="_blank" rel="noopener noreferrer">
+                                    RABDes
+                                </Link>
+                                <Link href="https://forms.gle/ssUDuomrST6UmvDG6" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-6 py-1 text-base w-full text-center" target="_blank" rel="noopener noreferrer">
+                                    Peta Administrasi Desa
+                                </Link>
+                                <Link href="/Bencana" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-6 py-1 text-base w-full text-center border-b border-gray-200">
+                                    Lokasi Rawan Longsor
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="w-full">
+                        <button
+                            onClick={toggleLayananMobile}
+                            className="flex justify-center items-center text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center border-b border-gray-200"
+                        >
+                            <span>Layanan</span>
+                            <FontAwesomeIcon icon={isLayananMobileOpen ? faChevronUp : faChevronDown} className="ml-2" />
+                        </button>
+                        {isLayananMobileOpen && (
+                            <div className="flex flex-col w-full bg-gray-50">
+                                <Link href="https://forms.gle/XbvTjjxoLnN8pq2j8" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-6 py-1 text-base w-full text-center" target="_blank" rel="noopener noreferrer">
+                                    Pengajuan Persuratan
+                                </Link>
+                                <Link href="https://forms.gle/ssUDuomrST6UmvDG6" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-6 py-1 text-base w-full text-center border-b border-gray-200">
+                                    Layanan Pengaduan Masyarakat
+                                </Link>
+                            </div>
+                        )}
+                    </div>
 
                     <Link href="/Kontak" onClick={toggleMobileMenu} className="text-black hover:text-[#0E6248] px-3 py-2 text-lg w-full text-center">
                         Kontak

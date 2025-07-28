@@ -198,7 +198,6 @@ const BeritaList = ({ displayLimit, itemsPerPage }: BeritaListProps) => {
           )
         )}
       </div>
-
       {isLandingPage && (
         <Link href={"/Berita"}>
           <Button className="flex justify-center items-center w-auto bg-[#0E6248] mt-8 md:mt-10 text-sm sm:text-[14px] px-4 py-3 sm:p-5">
@@ -208,6 +207,7 @@ const BeritaList = ({ displayLimit, itemsPerPage }: BeritaListProps) => {
       )}
 
       {!isLandingPage && totalPages > 1 && renderPaginationButtons()}
+
     </div>
   );
 };
