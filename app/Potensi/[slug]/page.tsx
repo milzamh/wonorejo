@@ -139,10 +139,6 @@ function getResponsiveImageSize(width: number, height: number) {
   }
 }
 
-interface PotensiDetailPageProps {
-  params: { slug: string };
-}
-
 export async function generateStaticParams() {
 
   const query: Record<string, any> = {
@@ -161,9 +157,9 @@ const entries: EntryCollection<PotensiSkeleton> =
 export default async function PotensiDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Change this line - params is now Promise
 }) {
-  const { slug } = params;
+  const { slug } = await params; // Add await here
 
   // Use a flexible query object and assert to EntriesQueries
   const query: Record<string, any> = {
@@ -268,5 +264,3 @@ export default async function PotensiDetailPage({
     </div>
   );
 };
-
-
