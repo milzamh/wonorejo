@@ -119,10 +119,9 @@ const detailRichTextOptions = {
 export default async function BeritaDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Change this line
 }) {
-  const { slug } = params;
-  
+  const { slug } = await params; // Add await here
   const query: Record<string, any> = {
     content_type: "beritaWonorejo",
     "fields.beritaId": slug,
