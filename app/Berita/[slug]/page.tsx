@@ -116,15 +116,13 @@ const detailRichTextOptions = {
   },
 };
 
-interface BeritaDetailPageProps {
-  params: { slug: string };
-}
-
 export default async function BeritaDetailPage({
   params,
-}: BeritaDetailPageProps) {
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
-
+  
   const query: Record<string, any> = {
     content_type: "beritaWonorejo",
     "fields.beritaId": slug,

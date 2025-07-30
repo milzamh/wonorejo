@@ -158,9 +158,11 @@ const entries: EntryCollection<PotensiSkeleton> =
   }));
 }
 
-const PotensiDetailPage: React.FC<PotensiDetailPageProps> = async ({
+export default async function PotensiDetailPage({
   params,
-}) => {
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
 
   // Use a flexible query object and assert to EntriesQueries
@@ -267,4 +269,4 @@ const PotensiDetailPage: React.FC<PotensiDetailPageProps> = async ({
   );
 };
 
-export default PotensiDetailPage;
+
