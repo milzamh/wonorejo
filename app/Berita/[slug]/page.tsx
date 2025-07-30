@@ -1,16 +1,19 @@
-import Image from "next/image";
+import React from "react";
 import { notFound } from "next/navigation";
-import { client } from "../../contentful/client";
+import Image from "next/image";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, INLINES, Document } from "@contentful/rich-text-types";
 import type {
   Entry,
   EntryCollection,
   EntrySkeletonType,
   Asset,
+  EntriesQueries,
+  AssetFile,
+  AssetDetails,
+  AssetFields, // Import AssetFields here
 } from "contentful";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, INLINES, Document } from "@contentful/rich-text-types";
-import Navbar from "../../_components/Navbar";
-import Footer from "../../_components/Footer";
+import { client } from "../../contentful/client";
 
 interface IBeritaFields {
   judul: string;
@@ -24,7 +27,7 @@ type BeritaSkeleton = EntrySkeletonType<IBeritaFields, "beritaWonorejo">;
 type BeritaEntry = Entry<BeritaSkeleton>;
 
 export async function generateStaticParams() {
-  const entries = await client.getEntries<IBeritaFields>({
+  const entries = await client.getEntries<BeritaSkeleton>({
     content_type: "beritaWonorejo",
     select: ["fields.beritaId"],
     limit: 1000,
@@ -61,12 +64,34 @@ const detailRichTextOptions = {
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
       const asset = node.data.target as Asset;
-      const imageUrl = asset.fields.file?.url;
-      const altText = asset.fields.description || asset.fields.title || "";
-      const { width, height } = asset.fields.file?.details?.image || {
-        width: 0,
-        height: 0,
-      };
+
+      // Safely access asset fields and cast to AssetFields
+      const assetFields = asset.fields as AssetFields | undefined;
+
+      const assetFile = assetFields?.file as AssetFile | undefined;
+      const imageUrl = assetFile?.url;
+
+      let altText = "";
+      if (typeof assetFields?.description === "string") {
+        altText = assetFields.description;
+      } else if (typeof assetFields?.title === "string") {
+        altText = assetFields.title;
+      } else {
+        altText = "Gambar Tersemat";
+      }
+
+      let descriptionForDisplay = "";
+      if (typeof assetFields?.description === "string") {
+        descriptionForDisplay = assetFields.description;
+      } else if (typeof assetFields?.title === "string") {
+        descriptionForDisplay = assetFields.title;
+      }
+
+      const imageDetails = assetFile?.details?.image as
+        | { width: number; height: number }
+        | undefined;
+      const width = imageDetails?.width || 0;
+      const height = imageDetails?.height || 0;
 
       if (!imageUrl) return null;
 
@@ -80,9 +105,9 @@ const detailRichTextOptions = {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
             className="rounded-lg shadow-md max-w-full h-auto mx-auto"
           />
-          {asset.fields.description && (
+          {descriptionForDisplay && (
             <p className="text-sm text-gray-500 mt-2">
-              {asset.fields.description}
+              {descriptionForDisplay}
             </p>
           )}
         </div>
@@ -91,19 +116,25 @@ const detailRichTextOptions = {
   },
 };
 
+interface BeritaDetailPageProps {
+  params: { slug: string };
+}
+
 export default async function BeritaDetailPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: BeritaDetailPageProps) {
   const { slug } = params;
 
+  const query: Record<string, any> = {
+    content_type: "beritaWonorejo",
+    "fields.beritaId": slug,
+    limit: 1,
+  };
+
   const entries: EntryCollection<BeritaSkeleton> =
-    await client.getEntries<BeritaSkeleton>({
-      content_type: "beritaWonorejo",
-      "fields.beritaId": slug,
-      limit: 1,
-    });
+    await client.getEntries<BeritaSkeleton>(
+      query as EntriesQueries<BeritaSkeleton, undefined>
+    );
 
   const article: BeritaEntry | undefined = entries.items[0];
 
@@ -111,17 +142,50 @@ export default async function BeritaDetailPage({
     notFound();
   }
 
-  const imageUrl = article.fields.gambar?.fields?.file?.url
-    ? `https:${article.fields.gambar.fields.file.url}`
+  // Safely access article.fields.gambar.fields
+  const articleGambarFields = article.fields.gambar?.fields as
+    | AssetFields
+    | undefined;
+  const articleAssetFile = articleGambarFields?.file as AssetFile | undefined;
+
+  const imageUrl = articleAssetFile?.url
+    ? `https:${articleAssetFile.url}`
     : "/Cthberita.svg";
 
-  const publishedDate = article.fields.tanggalPublikasi
-    ? new Date(article.fields.tanggalPublikasi).toLocaleDateString("id-ID")
-    : "Tanggal tidak tersedia";
+  let imageAlt = "";
+  if (typeof articleGambarFields?.description === "string") {
+    imageAlt = articleGambarFields.description;
+  } else if (typeof articleGambarFields?.title === "string") {
+    imageAlt = articleGambarFields.title;
+  } else if (typeof article.fields.judul === "string") {
+    imageAlt = article.fields.judul;
+  } else {
+    imageAlt = "Gambar Artikel";
+  }
+
+  let publishedDate = "Tanggal tidak tersedia";
+  const tanggalPublikasi = article.fields.tanggalPublikasi;
+  if (
+    typeof tanggalPublikasi === "string" &&
+    tanggalPublikasi &&
+    (tanggalPublikasi as string).trim() !== ""
+  ) {
+    const dateObj = new Date(tanggalPublikasi);
+    if (!isNaN(dateObj.getTime())) {
+      publishedDate = dateObj.toLocaleDateString("id-ID");
+    }
+  }
+
+  const judulText =
+    typeof article.fields.judul === "string"
+      ? article.fields.judul
+      : "Judul Tidak Tersedia";
+  const deskripsiContent = article.fields.deskripsi;
+
 
   return (
     <div className="flex flex-col">
-       <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
+      <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px]">
         <Image
           src="/Hero.svg"
           alt="Hero Berita"
@@ -136,25 +200,29 @@ export default async function BeritaDetailPage({
           </h1>
         </div>
       </div>
-      <div className="flex flex-col px-21 py-15">
-        <h1 className="flex font-bold text-[32px] text-[#0E6248] ">
-          {article.fields.judul}
+      <div className="container mx-auto px-4 md:px-20 py-10 md:py-15">
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-[32px] text-[#0E6248] mb-4">
+          {judulText}
         </h1>
         <p className="text-gray-600 text-sm mb-6">{publishedDate}</p>
-        <div className="flex flex-col justify-center items-center w-full">
-          <Image
-            src={imageUrl}
-            alt={article.fields.judul || "Gambar Artikel"}
-            width={1200}
-            height={600}
-            className="object-cover flex rounded-lg justify-center items-center"
-            priority
-          />
-          <div className=" pt-10 text-gray-800">
-            {documentToReactComponents(
-              article.fields.deskripsi,
-              detailRichTextOptions
-            )}
+        <div className="flex flex-col items-center w-full">
+          <div className="relative w-full max-w-4xl h-64 md:h-96 rounded-lg overflow-hidden shadow-lg mb-8">
+            <Image
+              src={imageUrl}
+              alt={imageAlt}
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
+              priority
+              className="rounded-lg"
+            />
+          </div>
+          <div className="prose prose-lg max-w-none text-gray-800 pt-10 text-justify">
+            {deskripsiContent &&
+              documentToReactComponents(
+                deskripsiContent as unknown as Document,
+                detailRichTextOptions
+              )}
           </div>
         </div>
       </div>

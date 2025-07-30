@@ -6,14 +6,30 @@ import { Card, CardDescription } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { client } from "../contentful/client";
-import type { Entry, Asset, EntryCollection, EntrySkeletonType } from "contentful";
+import type { Entry, Asset, EntryCollection, EntrySkeletonType, EntriesQueries, AssetFields } from "contentful";
+
+interface ContentfulAssetFile {
+  url: string;
+  details?: {
+    image?: {
+      width?: number;
+      height?: number;
+    };
+  };
+}
+
+interface ContentfulAssetFields {
+  file?: ContentfulAssetFile;
+  title?: string;
+  description?: string;
+}
 
 interface IBeritaFields {
   gambar: Asset;
   judul: string;
   deskripsiSingkat: string;
   tanggalPublikasi: string;
-  beritaId: Number;
+  beritaId: string;
 }
 
 type BeritaSkeleton = EntrySkeletonType<IBeritaFields, 'beritaWonorejo'>;
@@ -40,14 +56,16 @@ const BeritaList = ({ displayLimit, itemsPerPage }: BeritaListProps) => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const queryOptions: { content_type: string; order: string; limit?: number; skip?: number } = {
+      const queryOptions: { content_type: string; order: string[]; limit?: number; skip?: number } = {
         content_type: 'beritaWonorejo',
-        order: '-fields.tanggalPublikasi',
+        order: ['-fields.tanggalPublikasi'],
         limit: apiLimit,
         skip: apiSkip,
       };
 
-      const entries: EntryCollection<BeritaSkeleton> = await client.getEntries<BeritaSkeleton>(queryOptions);
+      const entries: EntryCollection<BeritaSkeleton> = await client.getEntries<BeritaSkeleton>(
+        queryOptions as EntriesQueries<BeritaSkeleton, undefined>
+      );
       setBerita(entries.items);
       setTotalEntries(entries.total);
       setLoading(false);
@@ -157,12 +175,20 @@ const BeritaList = ({ displayLimit, itemsPerPage }: BeritaListProps) => {
         ) : (
           berita.length > 0 ? (
             berita.map((item, index) => {
+              const assetFields = item.fields.gambar?.fields as ContentfulAssetFields | undefined;
               const uniqueKey = item.sys?.id || `berita-${index}`;
-              const imageUrl = item.fields.gambar?.fields?.file?.url ? `https:${item.fields.gambar.fields.file.url}` : '/placeholder.svg';
-              const titleText = item.fields.judul || 'Judul Tidak Tersedia';
-              const descriptionText = item.fields.deskripsiSingkat || 'Deskripsi tidak tersedia.';
-              const publishedDate = item.fields.tanggalPublikasi ? new Date(item.fields.tanggalPublikasi).toLocaleDateString('id-ID') : 'Tanggal tidak tersedia';
-
+              const imageUrl = assetFields?.file?.url ? `https:${assetFields.file.url}` : '/placeholder.svg';
+              const titleText = (typeof item.fields.judul === 'string' ? item.fields.judul : 'Judul Tidak Tersedia');
+              const descriptionText = (typeof item.fields.deskripsiSingkat === 'string' ? item.fields.deskripsiSingkat : 'Deskripsi Tidak Tersedia')
+              let publishedDate = 'Tanggal tidak tersedia';
+              const tanggalPublikasi = item.fields.tanggalPublikasi;
+              if (typeof tanggalPublikasi === 'string' && tanggalPublikasi && (tanggalPublikasi as string).trim() !== '') {
+                  const dateObj = new Date(tanggalPublikasi);
+                  if (!isNaN(dateObj.getTime())) {
+                      publishedDate = dateObj.toLocaleDateString('id-ID');
+                  }
+              }
+            
               return (
                 <Link href={`/Berita/${item.fields.beritaId}`} key={uniqueKey} className="w-full">
                   <Card className="w-full h-[410px] p-0 mx-auto shadow-lg hover:shadow-2xl transition-all duration-300">
